@@ -65,23 +65,22 @@ exports.edit = function (req,res) {
 //Destroy
 exports.destroy = function (req,res) {
   console.log(req.params.list_id);
-  var todo = new Todo {_list: req.params.list_id}
+  var todo = new Todo ({_list: req.params.list_id})
   todo.remove(function (error, todo) {
     if (todo) {
-
-    }
-  })
-  var list = new List ({_id: req.params.list_id})
-  list.remove(function (error, list) {
-    if (list) {
-      List.find({}, function (error, lists) {
-        if (lists) {
-          res.json(lists)
-        } else if (error) {
-          console.error(error.stack);
-          res.redirect('/error');
-        }
-      })
+    var list = new List ({_id: req.params.list_id})
+    list.remove(function (error, list) {
+      if (list) {
+        List.find({}, function (error, lists) {
+          if (lists) {
+            res.json(lists)
+          } else if (error) {
+            console.error(error.stack);
+            res.redirect('/error');
+          }
+        })
+      }
+    })
     }
   })
 }
