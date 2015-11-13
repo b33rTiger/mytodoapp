@@ -3,6 +3,7 @@ var path = require('path'),
 
 var Todo = require('../models/todo');
 var List = require('../models/list');
+var Board = require('../models/board');
 
 //Index
 exports.index = function (req, res) {

@@ -14,7 +14,6 @@
       //Show One List of Todos
       $http.get('/api/todos?listId='+$scope.listId)
         .success(function (data) {
-          console.log($scope.listId);
           $scope.todos = data;
         })
         .error(function (data) {

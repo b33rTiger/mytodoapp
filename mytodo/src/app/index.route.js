@@ -17,6 +17,11 @@
         controller: 'TodoController',
         controllerAs: 'todos'
       })
+      .when('/lists', {
+        templateUrl: 'app/lists/list.html',
+        controller: 'ListController',
+        controllerAs: 'lists'
+      })
       .otherwise({
         redirectTo: '/'
       });

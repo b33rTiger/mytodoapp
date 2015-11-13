@@ -3,10 +3,14 @@ var path = require('path'),
 
 var Todo = require('../models/todo');
 var List = require('../models/list');
+var Board = require('../models/board');
 
 //Index
 exports.index = function (req, res) {
-  List.find({}, function (error, lists) {
+  var board_id = req.query.boardId;
+  List.find({_board: board_id})
+  .populate('_board')
+  .exec(function (error, lists) {
     if (lists) {
     res.json(lists)
     } else if (error) {
@@ -31,15 +35,18 @@ exports.show = function (req, res) {
 
 //Create
 exports.create = function (req,res) {
-  var list = new List ({name: req.body.name, description: req.body.description})
+  var boardId = req.body.boardId;
+  var list = new List ({name: req.body.name, _board: boardId});
+  console.log(list);
   list.save(function (error, list) {
+    console.log(error);
     if (list) {
-      List.find({}, function (error, lists) {
+      List.find({_board: boardId}, function (error, lists) {
         if (lists) {
           res.json(lists)
         } else if (error) {
           console.error(error.stack);
-          res.redirect('/error');
+          res.json({status: 400, message: error.message});
         }
       })
     }

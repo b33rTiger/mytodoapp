@@ -52,38 +52,51 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-<!-- Display Lists -->
-  <h2>Todo Lists</h2>
+<!-- Display Boards -->
+  <h2>Boards</h2>
   <div class="row">
-    <div ui-sortable ng-model='lists' ng-repeat='list in lists'>
-      <p class='input-group' style="cursor: move">
-        <input type="text" ng-model="list.name" class="form-control">
-          <span class='input-group-btn' aria-hidden='true'>
-            <button class="btn btn-info glyphicon glyphicon-pencil" ng-click='editList(list._id, list.name)'></button>
-          </span>
-          <span class='input-group-btn' aria-hidden='true'>
-            <a href="#/todos?listId={{list._id}}&listName={{list.name}}&listDescription={{list.description}}" class="btn btn-info glyphicon glyphicon-th-list"></a>
-          </span>
-          <span class='input-group-btn' aria-hidden='true'>
-            <button class="btn btn-danger glyphicon glyphicon-remove-sign" ng-click='deleteList(list._id)'></button>
-          </span>
-      </p>
-        <div class="descriptiom">
-          {{list.description}}
-        </div>
+    <div class="boards-page">
+      <div ng-model='boards' ng-repeat='board in boards'>
+        <ul class="board-list">
+          <li>
+            <a class="open-board" href="#/lists?boardId={{board._id}}&boardName={{board.name}}">
+              <span class="fade"></span>
+              <span class="details">
+                <span class="board-list-name">{{board.name}}</span>
+              </span>
+            </a>
+          </li>
+
+
+
+        <!-- <p class='input-group'>
+          <input type="text" ng-model="board.name" class="form-control">
+            <span class='input-group-btn' aria-hidden='true'>
+              <button class="btn btn-info glyphicon glyphicon-pencil" ng-click='editBoard(board._id, board.name)'></button>
+            </span>
+            <span class='input-group-btn' aria-hidden='true'>
+              <a href="#/boards?boardId={{board._id}}&boardName={{board.name}}&boardDescription={{board.description}}" class="btn btn-info glyphicon glyphicon-th-list"></a>
+            </span>
+            <span class='input-group-btn' aria-hidden='true'>
+              <button class="btn btn-danger glyphicon glyphicon-remove-sign" ng-click='deleteList(list._id)'></button>
+            </span>
+        </p> -->
+<!--           <div class="description">
+            {{list.description}}
+          </div> -->
+      </div>
     </div>
   </div>
-<!-- Create a Todo List -->
-  <h3>Create A Todo List</h3>
+<!-- Create a Board -->
+  <h3>Create A New Board</h3>
   <div class="row">
-    <div class="col-md-6.text-center make-list">
-      <form role="form" ng-submit="createList()">
+    <div class="col-md-6.text-center make-board">
+      <form role="form" ng-submit="createBoard()">
         <div class="row">
           <div class="input-group">
-            <input type="text" ng-model="formData.name" placeholder="What do you want to call this ToDo list?" class="form-control">
-            <input type='text' ng-model='formData.description' placeholder="Brief description....." class="form-control">
+            <input type="text" ng-model="formData.name" placeholder="Board Name" class="form-control">
             <span class="input-group-btn">
-              <input type="submit" class="btn btn-primary" value="Add">
+              <input type="submit" class="btn btn-primary" value="Create">
             </span>
           </div>
         </div>

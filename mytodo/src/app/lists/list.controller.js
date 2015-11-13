@@ -3,28 +3,31 @@
 
   angular
     .module('mytodo')
-    .controller('MainController', function ($scope, $http) {
+    .controller('ListController', function ($scope, $routeParams, $http) {
       $scope.todos = [];
       $scope.lists = [];
-      $scope.boards = [];
       $scope.formData = {};
+      $scope.boardId = $routeParams.boardId;
+      $scope.boardName = $routeParams.boardName;
+      $scope.boardDescription = $routeParams.boardDescription;
 
 
-      //Show Boards
-      $http.get('/api/boards')
+      //Show Lists
+      $http.get('/api/lists?boardId='+$scope.boardId)
         .success(function (data) {
-          $scope.boards = data;
+          $scope.lists = data;
         })
         .error(function (data) {
           console.log('Error: ' + data);
         });
 
-      //Create Board
-      $scope.createBoard = function () {
-        $http.post('/api/boards', $scope.formData)
+      //Create Lists
+      $scope.createList = function () {
+        $scope.formData.boardId = $scope.boardId;
+        $http.post('/api/lists', $scope.formData)
           .success(function (data) {
             $scope.formData = {};
-            $scope.boards = data;
+            $scope.lists = data;
           })
           .error(function (data) {
             console.log('Error: ' + data);
