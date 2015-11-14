@@ -7,10 +7,9 @@
       $scope.todos = [];
       $scope.lists = [];
       $scope.formData = {};
+      $scope.listId = $scope.list;
       $scope.boardId = $routeParams.boardId;
       $scope.boardName = $routeParams.boardName;
-      $scope.boardDescription = $routeParams.boardDescription;
-
 
       //Show Lists
       $http.get('/api/lists?boardId='+$scope.boardId)
@@ -33,6 +32,19 @@
             console.log('Error: ' + data);
           })
       };
+
+      //Create Todo
+      // $scope.createTodo = function (id) {
+      //   $scope.formData.listId = id;
+      //   $http.post('/api/todos', $scope.formData)
+      //     .success(function (data) {
+      //       $scope.formData = {};
+      //       $scope.todos = data;
+      //     })
+      //     .error(function (data) {
+      //       console.log('Error: ' + data);
+      //     })
+      // };
 
       //Delete Lists
       $scope.deleteList = function (id) {

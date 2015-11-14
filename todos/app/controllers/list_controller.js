@@ -9,10 +9,11 @@ var Board = require('../models/board');
 exports.index = function (req, res) {
   var board_id = req.query.boardId;
   List.find({_board: board_id})
-  .populate('_board')
+  .populate('todos')
   .exec(function (error, lists) {
     if (lists) {
-    res.json(lists)
+      console.log('lists: ', lists);
+      res.json(lists)
     } else if (error) {
       console.error(error.stack);
       res.redirect('/error');
@@ -21,25 +22,23 @@ exports.index = function (req, res) {
 }
 
 //Show
-exports.show = function (req, res) {
-  List.find({}, function (error, lists) {
-    if (lists) {
-      console.log(lists);
-    res.json(lists)
-    } else if (error) {
-      console.error(error.stack);
-      res.redirect('/error');
-    }
-  })
-}
+// exports.show = function (req, res) {
+//   List.find({}, function (error, lists) {
+//     if (lists) {
+//       console.log(lists);
+//     res.json(lists)
+//     } else if (error) {
+//       console.error(error.stack);
+//       res.redirect('/error');
+//     }
+//   })
+// }
 
 //Create
 exports.create = function (req,res) {
   var boardId = req.body.boardId;
   var list = new List ({name: req.body.name, _board: boardId});
-  console.log(list);
   list.save(function (error, list) {
-    console.log(error);
     if (list) {
       List.find({_board: boardId}, function (error, lists) {
         if (lists) {

@@ -11,18 +11,18 @@
       $scope.listName = $routeParams.listName;
       $scope.listDescription = $routeParams.listDescription;
 
-      //Show One List of Todos
-      $http.get('/api/todos?listId='+$scope.listId)
-        .success(function (data) {
-          $scope.todos = data;
-        })
-        .error(function (data) {
-          console.log('Error: ' + data);
-        })
+      // //Show One List of Todos
+      // $http.get('/api/todos?listId='+$scope.listId)
+      //   .success(function (data) {
+      //     $scope.todos = data;
+      //   })
+      //   .error(function (data) {
+      //     console.log('Error: ' + data);
+      //   })
 
       //Create Todo
-      $scope.createTodo = function () {
-        $scope.formData.listId = $scope.listId;
+      $scope.createTodo = function (id) {
+        $scope.formData.listId = id;
         $http.post('/api/todos', $scope.formData)
           .success(function (data) {
             $scope.formData = {};
