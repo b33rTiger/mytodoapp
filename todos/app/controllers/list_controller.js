@@ -7,12 +7,11 @@ var Board = require('../models/board');
 
 //Index
 exports.index = function (req, res) {
-  var board_id = req.query.boardId;
+  var board_id = req.param('boardId');
   List.find({_board: board_id})
   .populate('todos')
   .exec(function (error, lists) {
     if (lists) {
-      console.log('lists: ', lists);
       res.json(lists)
     } else if (error) {
       console.error(error.stack);
@@ -40,14 +39,10 @@ exports.create = function (req,res) {
   var list = new List ({name: req.body.name, _board: boardId});
   list.save(function (error, list) {
     if (list) {
-      List.find({_board: boardId}, function (error, lists) {
-        if (lists) {
-          res.json(lists)
-        } else if (error) {
-          console.error(error.stack);
-          res.json({status: 400, message: error.message});
-        }
-      })
+      res.json(list)
+    } else if (error) {
+      console.error(error.stack);
+      res.json({status: 400, message: error.message});
     }
   })
 }
@@ -55,7 +50,6 @@ exports.create = function (req,res) {
 //Edit
 exports.edit = function (req,res) {
   var list = {_id: req.params.list_id}
-  console.log(req.body.name);
   List.update(list, {name: req.body.name}, function (error, list) {
     if (list) {
       List.find({}, function (error, lists) {
@@ -70,22 +64,18 @@ exports.edit = function (req,res) {
 
 //Destroy
 exports.destroy = function (req,res) {
-  console.log(req.params.list_id);
   var todo = new Todo ({_list: req.params.list_id})
   todo.remove(function (error, todo) {
     if (todo) {
     var list = new List ({_id: req.params.list_id})
     list.remove(function (error, list) {
       if (list) {
-        List.find({}, function (error, lists) {
-          if (lists) {
-            res.json(lists)
-          } else if (error) {
-            console.error(error.stack);
-            res.redirect('/error');
-          }
-        })
-      }
+        console.log(list);
+        res.json(list)
+      } else if (error) {
+          console.error(error.stack);
+          res.redirect('/error');
+        }
     })
     }
   })

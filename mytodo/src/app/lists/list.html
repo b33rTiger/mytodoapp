@@ -55,21 +55,21 @@
 <!-- Display Lists -->
   <div class="row">
     <div class="col-md-12">
-      <h2>{{boardName}}</h2>
+      <h2>{{lists.boardName}}</h2>
     </div>
   </div>
   <div class="row">
-    <div ui-sortable ng-model='lists' ng-repeat='list in lists'>
+    <div ui-sortable ng-model='lists' ng-repeat='list in lists.lists'>
       <div class="col-md-4">
         <div class='input-group' style="cursor: move">
           <p class="list-name">
             <span style='float: left; padding-right: 1em'>{{list.name}}</span>
             <span class='input-group-btn' aria-hidden='true' style='float: left'>
-              <button class="btn btn-danger glyphicon glyphicon-remove-sign" ng-click='deleteList(list._id)'></button>
+              <button class="btn btn-danger glyphicon glyphicon-remove-sign" ng-click='lists.deleteList(list._id)'></button>
             </span>
           </p>
-            <div class="todo-items">
-              <span>{{list.todo.item}}</span>
+            <div class="todo-items" ng-repeat='item in lists.list.todos'>
+              <span>{{item.item}}</span>
             </div>
       <div ng-controller='TodoController'>
           <p>
@@ -91,10 +91,10 @@
   <h3>Create A Todo List</h3>
   <div class="row">
     <div class="col-md-6.text-center make-list">
-      <form role="form" ng-submit="createList()">
+      <form role="form" ng-submit="lists.createList()">
         <div class="row">
           <div class="input-group">
-            <input type="text" ng-model="formData.name" placeholder="Todo List Name" class="form-control">
+            <input type="text" ng-model="lists.formData.name" placeholder="Todo List Name" class="form-control">
             <span class="input-group-btn">
               <input type="submit" class="btn btn-primary" value="Add">
             </span>

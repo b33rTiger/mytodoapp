@@ -3,55 +3,52 @@
 
   angular
     .module('mytodo')
-    .controller('MainController', function ($scope, $http) {
-      $scope.todos = [];
-      $scope.lists = [];
-      $scope.boards = [];
-      $scope.formData = {};
-
+    .controller('MainController', ['BoardService', '$log', function (BoardService, $log) {
+      var vm = this;
+      vm.todos = [];
+      vm.lists = [];
+      vm.boards = [];
+      vm.formData = {};
 
       //Show Boards
-      $http.get('/api/boards')
-        .success(function (data) {
-          $scope.boards = data;
+      BoardService.getBoards()
+        .then(function (data) {
+          vm.boards = data;
         })
-        .error(function (data) {
-          console.log('Error: ' + data);
+        .catch(function (data) {
+          $log.error(data);
         });
 
       //Create Board
-      $scope.createBoard = function () {
-        $http.post('/api/boards', $scope.formData)
-          .success(function (data) {
-            $scope.formData = {};
-            $scope.boards = data;
-          })
-          .error(function (data) {
-            console.log('Error: ' + data);
+      vm.createBoard = function () {
+        BoardService.createBoard(vm.formData)
+          .then(function (data){
+            vm.boards.push(data);
+            vm.formData = {};
           })
       };
 
-      //Delete Lists
-      $scope.deleteList = function (id) {
-        $http.post('/api/delete/lists/' + id)
-          .success(function (data) {
-            $scope.lists = data;
-          })
-          .error(function (data) {
-            console.log('Error: ' + data);
-          });
-      };
+      // //Delete Lists
+      // vm.deleteList = function (id) {
+      //   $http.post('/api/delete/lists/' + id)
+      //     .success(function (data) {
+      //       vm.lists = data;
+      //     })
+      //     .error(function (data) {
+      //       $log.error(data);
+      //     });
+      // };
 
-      //Edit Lists
-      $scope.editList = function (id, updatedItem) {
-        $http.post('/api/edit/lists/' + id, {name: updatedItem})
-          .success(function (data) {
-            $scope.lists = data;
-          })
-          .error(function (data) {
-            console.log('Error: ' + data);
-          });
-      };
-    });
+      // //Edit Lists
+      // vm.editList = function (id, updatedItem) {
+      //   $http.post('/api/edit/lists/' + id, {name: updatedItem})
+      //     .success(function (data) {
+      //       vm.lists = data;
+      //     })
+      //     .error(function (data) {
+      //       $log.error(data);
+      //     });
+      // };
+    }]);
 
 })();

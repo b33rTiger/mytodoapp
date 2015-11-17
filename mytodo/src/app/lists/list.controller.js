@@ -3,34 +3,35 @@
 
   angular
     .module('mytodo')
-    .controller('ListController', function ($scope, $routeParams, $http) {
-      $scope.todos = [];
-      $scope.lists = [];
-      $scope.formData = {};
-      $scope.listId = $scope.list;
-      $scope.boardId = $routeParams.boardId;
-      $scope.boardName = $routeParams.boardName;
+    .controller('ListController', ['ListService', '$log', '$routeParams', function (ListService, $log, $routeParams) {
+      var vm = this;
+      vm.todos = [];
+      vm.lists = [];
+      vm.formData = {};
+      vm.listId = vm.list;
+      vm.boardId = $routeParams.boardId;
+      vm.boardName = $routeParams.boardName;
 
       //Show Lists
-      $http.get('/api/lists?boardId='+$scope.boardId)
-        .success(function (data) {
-          $scope.lists = data;
+      ListService.getLists(vm.boardId)
+        .then(function (data) {
+          vm.lists = data;
         })
-        .error(function (data) {
-          console.log('Error: ' + data);
+        .catch(function (data) {
+          $log.log(data);
         });
 
       //Create Lists
-      $scope.createList = function () {
-        $scope.formData.boardId = $scope.boardId;
-        $http.post('/api/lists', $scope.formData)
-          .success(function (data) {
-            $scope.formData = {};
-            $scope.lists = data;
+      vm.createList = function () {
+        vm.formData.boardId = vm.boardId;
+        ListService.createList(vm.formData)
+          .then(function (data) {
+            vm.lists.push(data);
+            vm.formData = {};
           })
-          .error(function (data) {
-            console.log('Error: ' + data);
-          })
+          .catch(function (data) {
+            $log.log(data);
+          });
       };
 
       //Create Todo
@@ -47,26 +48,31 @@
       // };
 
       //Delete Lists
-      $scope.deleteList = function (id) {
-        $http.post('/api/delete/lists/' + id)
-          .success(function (data) {
-            $scope.lists = data;
+      vm.deleteList = function (id) {
+        ListService.deleteList(id)
+          .then(function (data) {
+            for (var i = 0; i < vm.lists.length; i++) {
+              if (vm.lists[i]._id == data._id) {
+                vm.lists.splice(i, 1);
+                break;
+              }
+            }
           })
-          .error(function (data) {
-            console.log('Error: ' + data);
+          .catch(function (data) {
+            $log.log('Error: ' + data);
           });
       };
 
       //Edit Lists
-      $scope.editList = function (id, updatedItem) {
-        $http.post('/api/edit/lists/' + id, {name: updatedItem})
-          .success(function (data) {
-            $scope.lists = data;
-          })
-          .error(function (data) {
-            console.log('Error: ' + data);
-          });
-      };
-    });
+      // $scope.editList = function (id, updatedItem) {
+      //   $http.post('/api/edit/lists/' + id, {name: updatedItem})
+      //     .success(function (data) {
+      //       $scope.lists = data;
+      //     })
+      //     .error(function (data) {
+      //       console.log('Error: ' + data);
+      //     });
+      // };
+    }]);
 
 })();

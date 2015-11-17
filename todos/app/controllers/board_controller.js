@@ -35,14 +35,10 @@ exports.create = function (req,res) {
   var board = new Board ({name: req.body.name, description: req.body.description})
   board.save(function (error, board) {
     if (board) {
-      Board.find({}, function (error, boards) {
-        if (boards) {
-          res.json(boards)
-        } else if (error) {
-          console.error(error.stack);
-          res.json({status: 400, message: error.message});
-        }
-      })
+      res.json(board)
+    } else if (error) {
+      console.error(error.stack);
+      res.json({status: 400, message: error.message});
     }
   })
 }
