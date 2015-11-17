@@ -3,41 +3,46 @@
 
   angular
     .module('mytodo')
-    .controller('TodoController', function ($scope, $routeParams, $http) {
-      $scope.todos = [];
-      $scope.lists = [];
-      $scope.formData = {};
-      $scope.listId = $routeParams.listId;
-      $scope.listName = $routeParams.listName;
-      $scope.listDescription = $routeParams.listDescription;
+    .controller('TodoController', ['TodoService', '$log', '$scope', function (TodoService, $log, $scope) {
+      var vm = this;
+      vm.todos = [];
+      vm.lists = [];
+      vm.formData = {};
+      // vm.listId = $routeParams.listId;
+      // vm.listName = $routeParams.listName;
+      // vm.listDescription = $routeParams.listDescription;
 
-      // //Show One List of Todos
-      // $http.get('/api/todos?listId='+$scope.listId)
-      //   .success(function (data) {
-      //     $scope.todos = data;
-      //   })
-      //   .error(function (data) {
-      //     console.log('Error: ' + data);
-      //   })
+      //Get Todos
+      vm.getTodos = function (listId) {
+        TodoService.getTodos(listId)
+          .then(function (data) {
+            console.log('todoscontroller data: ', data);
+            vm.todos = data;
+          })
+          .catch(function (data) {
+            $log.log(data);
+          });
+      };
 
       //Create Todo
-      $scope.createTodo = function (id) {
-        $scope.formData.listId = id;
-        $http.post('/api/todos', $scope.formData)
-          .success(function (data) {
-            $scope.formData = {};
-            $scope.todos = data;
+      vm.createTodo = function (id) {
+        vm.formData.listId = id;
+        TodoService.createTodo(vm.formData)
+          .then(function (data) {
+            vm.todos.push(data);
+            console.log(data);
+            vm.formData = {};
           })
-          .error(function (data) {
-            console.log('Error: ' + data);
-          })
+          .catch(function (data) {
+            $log.log(data);
+          });
       };
 
       //Delete Todos
-      $scope.deleteTodo = function (id) {
-        $http.post('/api/delete/' + id, {listId: $scope.listId})
+      vm.deleteTodo = function (id) {
+        $http.post('/api/delete/' + id, {listId: vm.listId})
           .success(function (data) {
-            $scope.todos = data;
+            vm.todos = data;
           })
           .error(function (data) {
             console.log('Error: ' + data);
@@ -45,16 +50,16 @@
       };
 
       //Edit Todos
-      $scope.editTodo = function (id, updatedItem) {
-        $http.post('/api/edit/' + id, {item: updatedItem, listId: $scope.listId})
+      vm.editTodo = function (id, updatedItem) {
+        $http.post('/api/edit/' + id, {item: updatedItem, listId: vm.listId})
           .success(function (data) {
-            $scope.todos = data;
+            vm.todos = data;
           })
           .error(function (data) {
             console.log('Error: ' + data);
           });
       };
 
-    });
+    }]);
 
 })();

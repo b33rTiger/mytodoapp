@@ -68,21 +68,23 @@
               <button class="btn btn-danger glyphicon glyphicon-remove-sign" ng-click='lists.deleteList(list._id)'></button>
             </span>
           </p>
-            <div class="todo-items" ng-repeat='item in lists.list.todos'>
-              <span>{{item.item}}</span>
+          <div ng-controller='TodoController as todos'>
+            <div ng-init='todos.getTodos(list._id)'>
+              <div class="todo-items" ng-repeat='item in todos.todos'>
+                <span>{{item.item}}</span>
+              </div>
             </div>
-      <div ng-controller='TodoController'>
-          <p>
-            <form role='form' ng-submit="createTodo(list._id)">
-              <div class="input_group">
-                  <input type="text" ng-model="formData.item" placeholder="Add Todo" class="form-control">
+            <p>
+              <form role='form' ng-submit="todos.createTodo(list._id)">
+                <div class="input_group">
+                  <input type="text" ng-model="todos.formData.item" placeholder="Add Todo" class="form-control">
                   <span class='input-group-btn'style='clear: both'>
                     <input type="submit" class="btn btn-info glyphicon glyphicon-plus">
                   </span>
-              </div>
-            </form>
-          </p>
-        </div>
+                </div>
+              </form>
+            </p>
+          </div>
         </div>
       </div>
     </div>

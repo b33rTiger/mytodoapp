@@ -32,7 +32,7 @@ app.use(function (req,res,next){
 
 //Routes
 //Index
-// app.get('/api/todos', TodoController.index);
+app.get('/api/todos', TodoController.index);
 app.get('/api/lists', ListController.index);
 app.get('/api/boards', BoardController.index);
 

@@ -3,7 +3,7 @@
 
   angular
     .module('mytodo')
-    .controller('ListController', ['ListService', '$log', '$routeParams', function (ListService, $log, $routeParams) {
+    .controller('ListController', ['ListService', 'TodoService', '$log', '$routeParams', function (ListService, TodoService, $log, $routeParams) {
       var vm = this;
       vm.todos = [];
       vm.lists = [];
@@ -35,16 +35,17 @@
       };
 
       //Create Todo
-      // $scope.createTodo = function (id) {
-      //   $scope.formData.listId = id;
-      //   $http.post('/api/todos', $scope.formData)
-      //     .success(function (data) {
-      //       $scope.formData = {};
-      //       $scope.todos = data;
+      // vm.createTodo = function (listId) {
+      //   vm.formData.listId = listId;
+      //   console.log(vm.formData);
+      //   TodoService.createTodo(vm.formData)
+      //     .then(function (data) {
+      //       vm.lists.push(data);
+      //       vm.formData = {};
       //     })
-      //     .error(function (data) {
-      //       console.log('Error: ' + data);
-      //     })
+      //     .catch(function (data) {
+      //       $log.log(data);
+      //     });
       // };
 
       //Delete Lists
