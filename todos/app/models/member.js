@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var memberSchema = new Schema({
   board: [{type: Schema.Types.ObjectId, ref: 'board'}],
   name: { type: String, unique: true},
-  description: String,
+  email: {type: String, unique: true},
+  password: String,
   created_at: Date,
   updated_at: Date
 })
