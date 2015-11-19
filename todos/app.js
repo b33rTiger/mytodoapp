@@ -7,6 +7,10 @@ var express = require('express'),
   jwt    = require('jsonwebtoken'),
   bodyParser = require('body-parser');
 
+//body-parser
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+
 app.set('superSecret', 'beerybeerbeer');
 
 //Database
@@ -27,26 +31,24 @@ var MemberController = require('./app/controllers/member_controller.js');
 var AuthenticationController = require('./app/controllers/authentication_controller.js');
 
 var AuthenticationMiddleware = require('./app/authentication_middleware');
+app.use('/api', AuthenticationMiddleware.authenticate);
 
 
-//body-parser
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());
 
-//Allow cross-site
-app.use(function (req,res,next){
-  res.header('Access-Control-Allow-Origin','*');
-  res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+// //Allow cross-site
+// app.use(function (req,res,next){
+//   res.header('Access-Control-Allow-Origin','*');
+//   res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
 
 
 //Routes
+app.post('/api/authenticate', AuthenticationController.authenticate);
+app.get('/api/members/show/:memberId', MemberController.show);
 app.post('/api/members/signup', MemberController.signUpPost);
 app.post('/api/members/login', MemberController.login);
 //Index
-// app.use('/api', AuthenticationMiddleware.authenticate);
-// app.post('/authenticate', AuthenticationController.authenticate);
 app.get('/api/todos', TodoController.index);
 app.get('/api/lists', ListController.index);
 app.get('/api/boards/:ownerId', BoardController.index);
@@ -61,6 +63,7 @@ app.post('/api/edit/:todo_id', TodoController.edit);
 app.post('/api/edit/lists/:list_id', ListController.edit);
 
 //Delete
+app.post('/api/delete/member/:memberId', MemberController.destroy);
 app.post('/api/delete/board/:ownerId', BoardController.destroy);
 app.post('/api/delete/:todo_id', TodoController.destroy);
 app.post('/api/delete/list/:list_id', ListController.destroy);
