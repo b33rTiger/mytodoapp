@@ -15,7 +15,7 @@ exports.index = function (req, res) {
       res.json(lists)
     } else if (error) {
       console.error(error.stack);
-      res.redirect('/error');
+      res.json({status: 400, message: error.message});
     }
   })
 }
@@ -57,7 +57,7 @@ exports.edit = function (req,res) {
       })
     } else if (error) {
       console.error(error.stack);
-      res.redirect('/error');
+      res.json({status: 400, message: error.message});
     }
   })
 }
@@ -70,11 +70,10 @@ exports.destroy = function (req,res) {
     var list = new List ({_id: req.params.list_id})
     list.remove(function (error, list) {
       if (list) {
-        console.log(list);
         res.json(list)
       } else if (error) {
-          console.error(error.stack);
-          res.redirect('/error');
+        console.error(error.stack);
+        res.json({status: 400, message: error.message});
         }
     })
     }

@@ -9,14 +9,12 @@ var Board = require('../models/board');
 //Index
 exports.index = function (req, res) {
   var list_id = req.query.listId;
-  console.log('list_id ', list_id);
   Todo.find({_list: list_id})
   .populate('_list')
   .exec(function (error, todos) {
     if (todos) {
     res.json(todos)
     } else if (error) {
-      console.log('Error: ', error.message);
       console.error(error.stack);
       res.json({status: 400, message: error.message});
     }

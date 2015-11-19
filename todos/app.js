@@ -3,7 +3,11 @@ var express = require('express'),
   app = express(),
   router = express.Router(),
   path = require('path'),
+  bcrypt = require('bcrypt-nodejs'),
+  jwt    = require('jsonwebtoken'),
   bodyParser = require('body-parser');
+
+app.set('superSecret', 'beerybeerbeer');
 
 //Database
 var mongoose = require('mongoose');
@@ -13,11 +17,17 @@ mongoose.connect('mongodb://localhost/todos');
 var Todo = require('./app/models/todo');
 var List = require('./app/models/list');
 var Board = require('./app/models/board');
+var Member = require('./app/models/member');
 
 //Controllers
 var TodoController = require('./app/controllers/todo_controller.js');
 var ListController = require('./app/controllers/list_controller.js');
 var BoardController = require('./app/controllers/board_controller.js');
+var MemberController = require('./app/controllers/member_controller.js');
+var AuthenticationController = require('./app/controllers/authentication_controller.js');
+
+var AuthenticationMiddleware = require('./app/authentication_middleware');
+
 
 //body-parser
 app.use(bodyParser.urlencoded({extended:true}));
@@ -30,13 +40,18 @@ app.use(function (req,res,next){
   next();
 });
 
+// app.use('/api', AuthenticationMiddleware.authenticate);
+
 //Routes
 //Index
+// app.post('/authenticate', AuthenticationController.authenticate);
 app.get('/api/todos', TodoController.index);
 app.get('/api/lists', ListController.index);
 app.get('/api/boards', BoardController.index);
 
 //Create
+app.post('/api/members/signup', MemberController.signUpPost);
+app.post('/api/members/login', MemberController.login);
 app.post('/api/todos', TodoController.create);
 app.post('/api/lists', ListController.create);
 app.post('/api/boards', BoardController.create);

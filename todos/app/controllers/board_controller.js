@@ -7,8 +7,11 @@ var Board = require('../models/board');
 
 //Index
 exports.index = function (req, res) {
-  Board.find({}, function (error, boards) {
+  Board.find({})
+  .populate('owner')
+  .exec(function (error, boards) {
     if (boards) {
+      console.log(boards);
     res.json(boards)
     } else if (error) {
       console.error(error.stack);
