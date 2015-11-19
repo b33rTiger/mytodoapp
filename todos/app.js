@@ -40,27 +40,28 @@ app.use(function (req,res,next){
   next();
 });
 
-// app.use('/api', AuthenticationMiddleware.authenticate);
 
 //Routes
+app.post('/api/members/signup', MemberController.signUpPost);
+app.post('/api/members/login', MemberController.login);
 //Index
+// app.use('/api', AuthenticationMiddleware.authenticate);
 // app.post('/authenticate', AuthenticationController.authenticate);
 app.get('/api/todos', TodoController.index);
 app.get('/api/lists', ListController.index);
-app.get('/api/boards', BoardController.index);
+app.get('/api/boards/:ownerId', BoardController.index);
 
 //Create
-app.post('/api/members/signup', MemberController.signUpPost);
-app.post('/api/members/login', MemberController.login);
 app.post('/api/todos', TodoController.create);
 app.post('/api/lists', ListController.create);
-app.post('/api/boards', BoardController.create);
+app.post('/api/boards/:ownerId', BoardController.create);
 
 //Edit
 app.post('/api/edit/:todo_id', TodoController.edit);
 app.post('/api/edit/lists/:list_id', ListController.edit);
 
 //Delete
+app.post('/api/delete/board/:ownerId', BoardController.destroy);
 app.post('/api/delete/:todo_id', TodoController.destroy);
 app.post('/api/delete/list/:list_id', ListController.destroy);
 

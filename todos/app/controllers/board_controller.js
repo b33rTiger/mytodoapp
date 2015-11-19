@@ -7,12 +7,12 @@ var Board = require('../models/board');
 
 //Index
 exports.index = function (req, res) {
-  Board.find({})
+  var owner = req.params.ownerId;
+  Board.find({owner: owner})
   .populate('owner')
   .exec(function (error, boards) {
     if (boards) {
-      console.log(boards);
-    res.json(boards)
+      res.json(boards)
     } else if (error) {
       console.error(error.stack);
       res.json({status: 400, message: error.message});
@@ -35,7 +35,8 @@ exports.index = function (req, res) {
 
 //Create
 exports.create = function (req,res) {
-  var board = new Board ({name: req.body.name, description: req.body.description})
+  var owner = req.params.ownerId;
+  var board = new Board ({name: req.body.name, owner: owner})
   board.save(function (error, board) {
     if (board) {
       res.json(board)
@@ -63,24 +64,24 @@ exports.create = function (req,res) {
 // }
 
 //Destroy
-// exports.destroy = function (req,res) {
-//   console.log(req.params.list_id);
-//   var todo = new Todo ({_list: req.params.list_id})
-//   todo.remove(function (error, todo) {
-//     if (todo) {
-//     var list = new List ({_id: req.params.list_id})
-//     list.remove(function (error, list) {
-//       if (list) {
-//         List.find({}, function (error, lists) {
-//           if (lists) {
-//             res.json(lists)
-//           } else if (error) {
-//             console.error(error.stack);
-//             res.redirect('/error');
-//           }
-//         })
-//       }
-//     })
-//     }
-//   })
-// }
+exports.destroy = function (req,res) {
+  var todo = new Todo ({_list: req.params.list_id})
+  todo.remove(function (error, todo) {
+    if (todo) {
+    var list = new List ({_id: req.params.list_id})
+    list.remove(function (error, list) {
+      if (list) {
+        var board = new Board ({owner: req.params.memberId})
+        Board.remove(function (error, board) {
+          if (board) {
+            res.json(board)
+          } else if (error) {
+            console.error(error.stack);
+            res.json({status: 400, message: error.message});
+          }
+        })
+      }
+    })
+    }
+  })
+}
