@@ -8,6 +8,7 @@
       vm.todos = [];
       vm.lists = [];
       vm.boards = [];
+      vm.members = {};
       vm.formData = {};
 
       //Show Boards

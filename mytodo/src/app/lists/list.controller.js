@@ -34,20 +34,6 @@
           });
       };
 
-      //Create Todo
-      // vm.createTodo = function (listId) {
-      //   vm.formData.listId = listId;
-      //   console.log(vm.formData);
-      //   TodoService.createTodo(vm.formData)
-      //     .then(function (data) {
-      //       vm.lists.push(data);
-      //       vm.formData = {};
-      //     })
-      //     .catch(function (data) {
-      //       $log.log(data);
-      //     });
-      // };
-
       //Delete Lists
       vm.deleteList = function (id) {
         ListService.deleteList(id)

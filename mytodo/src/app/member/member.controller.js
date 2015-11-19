@@ -3,10 +3,33 @@
 
   angular
     .module('mytodo')
-    .controller('MemberController', ['MemberService', '$log', function (MemberService, $log) {
+    .controller('MemberController', ['MemberService', '$log', '$location', function (MemberService, $log, $location) {
       var vm = this;
       vm.boards = [];
+      vm.members = {};
       vm.formData = {};
+
+    //Create Member
+    vm.createMember = function () {
+      MemberService.createMember(vm.formData)
+        .then(function (data) {
+          $location.path('/memberlogin');
+        })
+        .catch(function (data) {
+          $log.error(data);
+        });
+    };
+
+    //Login Member
+    vm.loginMember = function () {
+      MemberService.loginMember(vm.formData)
+        .then(function (data) {
+          $location.path('/boards');
+        })
+        .catch(function (data) {
+          $log.error(data);
+        });
+    };
 
       //Show Boards
       // BoardService.getBoards()
