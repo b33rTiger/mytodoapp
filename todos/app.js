@@ -31,7 +31,7 @@ var MemberController = require('./app/controllers/member_controller.js');
 var AuthenticationController = require('./app/controllers/authentication_controller.js');
 
 var AuthenticationMiddleware = require('./app/authentication_middleware');
-app.use('/api', AuthenticationMiddleware.authenticate);
+// app.use('/api', AuthenticationMiddleware.authenticate);
 
 
 
@@ -44,7 +44,7 @@ app.use('/api', AuthenticationMiddleware.authenticate);
 
 
 //Routes
-app.post('/api/authenticate', AuthenticationController.authenticate);
+// app.post('/api/authenticate', AuthenticationController.authenticate);
 app.get('/api/members/show/:memberId', MemberController.show);
 app.post('/api/members/signup', MemberController.signUpPost);
 app.post('/api/members/login', MemberController.login);

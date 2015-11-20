@@ -12,6 +12,7 @@ exports.index = function (req, res) {
   .populate('todos')
   .exec(function (error, lists) {
     if (lists) {
+      console.log('lists: ', lists);
       res.json(lists)
     } else if (error) {
       console.error(error.stack);
