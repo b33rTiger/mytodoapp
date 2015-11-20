@@ -48,6 +48,7 @@ var AuthenticationMiddleware = require('./app/authentication_middleware');
 app.get('/api/members/show/:memberId', MemberController.show);
 app.post('/api/members/signup', MemberController.signUpPost);
 app.post('/api/members/login', MemberController.login);
+
 //Index
 app.get('/api/todos', TodoController.index);
 app.get('/api/lists', ListController.index);
