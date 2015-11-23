@@ -3,7 +3,7 @@
 
   angular
     .module('mytodo')
-    .controller('MemberController', ['MemberService', '$log', '$location', function (MemberService, $log, $location) {
+    .controller('MemberController', ['MemberService', 'AuthenticationService', '$log', '$location', function (MemberService, AuthenticationService, $log, $location) {
       var vm = this;
       vm.boards = [];
       vm.members = {};
@@ -24,7 +24,8 @@
     vm.loginMember = function () {
       MemberService.loginMember(vm.formData)
         .then(function (data) {
-          $location.path('/boards');
+          AuthenticationService.setCredentials(data);
+          $location.path('/boards/');
         })
         .catch(function (data) {
           $log.error(data);

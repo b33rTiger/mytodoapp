@@ -44,10 +44,11 @@ var AuthenticationMiddleware = require('./app/authentication_middleware');
 
 
 //Routes
-// app.post('/api/authenticate', AuthenticationController.authenticate);
+app.use('/api', AuthenticationMiddleware.authenticate);
+app.post('/authenticate', AuthenticationController.authenticate);
 app.get('/api/members/show/:memberId', MemberController.show);
 app.post('/api/members/signup', MemberController.signUpPost);
-app.post('/api/members/login', MemberController.login);
+app.post('/api/members/login', AuthenticationController.authenticate);
 
 //Index
 app.get('/api/todos', TodoController.index);

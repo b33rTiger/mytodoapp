@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken'),
   bcrypt = require('bcrypt-nodejs');
 
 exports.authenticate = function (req, res, next) {
-  if(req.originalUrl == '/api/members/signup' || req.originalUrl == '/api/members/login' || req.originalUrl == '/api/authenticate') {
+  if(req.originalUrl == '/api/members/signup' || req.originalUrl == '/api/members/login' || req.originalUrl == '/authenticate') {
     next();
     return;
   }

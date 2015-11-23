@@ -3,18 +3,20 @@
 
   angular
     .module('mytodo')
-    .controller('MainController', ['BoardService', '$log', function (BoardService, $log) {
+    .controller('MainController', ['BoardService', '$log','$rootScope', '$cookieStore', function (BoardService, $log, $rootScope, $cookieStore) {
       var vm = this;
       vm.todos = [];
       vm.lists = [];
       vm.boards = [];
       vm.members = {};
       vm.formData = {};
+      vm.memberName = $cookieStore.get('globals').currentUser.name;
 
       //Show Boards
       BoardService.getBoards()
         .then(function (data) {
           vm.boards = data;
+
         })
         .catch(function (data) {
           $log.error(data);
