@@ -4,6 +4,7 @@ var path = require('path'),
 var Todo = require('../models/todo');
 var List = require('../models/list');
 var Board = require('../models/board');
+var Member = require('../models/member');
 
 //Index
 exports.index = function (req, res) {
@@ -35,8 +36,7 @@ exports.index = function (req, res) {
 
 //Create
 exports.create = function (req,res) {
-  var owner = req.params.ownerId;
-  var board = new Board ({name: req.body.name, owner: owner})
+  var board = new Board ({name: req.body.name, owner: req.body.owner_id});
   board.save(function (error, board) {
     if (board) {
       res.json(board)

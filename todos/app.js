@@ -58,7 +58,7 @@ app.get('/api/boards/:ownerId', BoardController.index);
 //Create
 app.post('/api/todos', TodoController.create);
 app.post('/api/lists', ListController.create);
-app.post('/api/boards/:ownerId', BoardController.create);
+app.post('/api/boards', BoardController.create);
 
 //Edit
 app.post('/api/edit/:todo_id', TodoController.edit);

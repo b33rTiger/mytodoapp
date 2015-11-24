@@ -3,7 +3,7 @@
 
   angular
     .module('mytodo')
-    .controller('ListController', ['ListService', 'TodoService', '$log', '$routeParams', function (ListService, TodoService, $log, $routeParams) {
+    .controller('ListController', ['ListService', 'TodoService', '$log', '$routeParams', '$rootScope', '$cookieStore', function (ListService, TodoService, $log, $routeParams, $rootScope, $cookieStore) {
       var vm = this;
       vm.todos = [];
       vm.lists = [];
@@ -11,6 +11,7 @@
       vm.listId = vm.list;
       vm.boardId = $routeParams.boardId;
       vm.boardName = $routeParams.boardName;
+      vm.memberName = $cookieStore.get('globals').currentUser.name;
 
       //Show Lists
       ListService.getLists(vm.boardId)

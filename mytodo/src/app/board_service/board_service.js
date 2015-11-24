@@ -23,6 +23,7 @@ angular
 
     service.createBoard = function (formData) {
       var deferred = $q.defer();
+      var owner_id = currentUser.id;
       $http.post('/api/boards', formData)
         .success(function (data) {
           deferred.resolve(data);
