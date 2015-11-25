@@ -31,19 +31,20 @@
     </div><!-- /.container-fluid -->
   </nav>
 <!-- Display Boards -->
-  <h2>Boards</h2>
+  <h3 class="boards">My Boards</h3>
   <div class="row">
     <div class="boards-page">
       <div ng-model='main' ng-repeat='board in main.boards'>
-        <ul class="board-list">
-          <li>
-            <a class="open-board" href="#/lists?boardId={{board._id}}&boardName={{board.name}}">
+<!--         <ul class="board-list">
+          <li> -->
+          <a class="box" href="#/lists?boardId={{board._id}}&boardName={{board.name}}">
+            <div class="open-board">
               <span class="fade"></span>
-              <span class="details">
                 <span class="board-list-name">{{board.name}}</span>
               </span>
-            </a>
-          </li>
+            </div>
+          </a>
+          <!-- </li> -->
 
 
 
@@ -66,7 +67,7 @@
     </div>
   </div>
 <!-- Create a Board -->
-  <h3>Create A New Board</h3>
+  <h3 class="boards">Create A New Board</h3>
   <div class="row">
     <div class="col-md-6.text-center make-board">
       <form role="form" ng-submit="main.createBoard()">

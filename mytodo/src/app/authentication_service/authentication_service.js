@@ -28,7 +28,6 @@
     // Store credentials for reuse. They are stored in $rootScope for the current app session.
     // Stored in the $cookieStore for use if the app is reloaded
     function setCredentials(data) {
-      console.log('set cred: ', data);
       $rootScope.globals = {
         currentUser: {
           email: data.email,

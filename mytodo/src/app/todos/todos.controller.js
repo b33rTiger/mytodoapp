@@ -16,7 +16,6 @@
       vm.getTodos = function (listId) {
         TodoService.getTodos(listId)
           .then(function (data) {
-            console.log('todoscontroller data: ', data);
             vm.todos = data;
           })
           .catch(function (data) {
@@ -30,7 +29,6 @@
         TodoService.createTodo(vm.formData)
           .then(function (data) {
             vm.todos.push(data);
-            console.log(data);
             vm.formData = {};
           })
           .catch(function (data) {
@@ -44,8 +42,8 @@
           .success(function (data) {
             vm.todos = data;
           })
-          .error(function (data) {
-            console.log('Error: ' + data);
+          .catch(function (data) {
+            $log.log(data);
           });
       };
 
@@ -55,8 +53,8 @@
           .success(function (data) {
             vm.todos = data;
           })
-          .error(function (data) {
-            console.log('Error: ' + data);
+          .catch(function (data) {
+            $log.log(data);
           });
       };
 

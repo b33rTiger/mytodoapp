@@ -6,7 +6,6 @@ angular
   .factory('BoardService', ['$http','$q','$rootScope', '$cookieStore', function ($http, $q, $rootScope, $cookieStore) {
     var service = {};
     var currentUser = $cookieStore.get('globals').currentUser;
-    console.log('board serv cook: ', $cookieStore.get('globals'));
 
     service.getBoards = function () {
       var deferred = $q.defer();

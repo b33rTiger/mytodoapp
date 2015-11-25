@@ -1,3 +1,7 @@
+body {
+  background-color: #453C50;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -16,3 +20,58 @@
 .make-list {
   padding-bottom: 3px;
 }
+
+.box {
+  float: left;
+  width: 200px;
+  height: 100px;
+  margin: 1em;
+  background-color: #337AB7;
+}
+
+.boards-page a {
+  text-decoration: none;
+}
+
+.boards {
+  display: inline-block;
+  line-height: 24px;
+  margin: 3px 0 0;
+  font-size: 1pc;
+  font-weight: 700;
+  color: #6A915A;
+}
+
+.board-list-name {
+  background-size: cover;
+  background-position: center center;
+  border-radius: 3px;
+  color: white;
+  display: block;
+  font-size: 1pc;
+  font-weight: 600;
+  line-height: 20px
+  margin: 0 1pc 0 0;
+  min-height: 18px;
+  padding: 8px 9pt;
+  position: relative;
+}
+
+.lists {
+  background-color: #A9A368;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.lists:first-child {
+  margin-left: 10px;
+}
+
+.lists-boardname {
+  padding-bottom: 10px;
+}
+
+/*.open-board {
+  color: white;
+}*/

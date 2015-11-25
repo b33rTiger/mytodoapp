@@ -26,7 +26,6 @@
       //Create Board
       vm.createBoard = function () {
         vm.formData.owner_id = vm.owner_id;
-        console.log('owner_id: ', vm.owner_id);
         BoardService.createBoard(vm.formData)
           .then(function (data){
             vm.boards.push(data);
