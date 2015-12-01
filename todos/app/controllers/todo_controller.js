@@ -64,14 +64,10 @@ exports.destroy = function (req,res) {
   var todo = new Todo ({_id: req.params.todo_id})
   todo.remove(function (error, todo) {
     if (todo) {
-      Todo.find({_list: listId}, function (error, todos) {
-        if (todos) {
-          res.json(todos)
-        } else if (error) {
-          console.error(error.stack);
-          res.redirect('/error');
-        }
-      })
-    }
+      res.json(todo)
+    } else if (error) {
+      console.error(error.stack);
+      res.redirect('/error');
+      }
   })
 }

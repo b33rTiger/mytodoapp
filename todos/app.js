@@ -67,7 +67,7 @@ app.post('/api/edit/lists/:list_id', ListController.edit);
 //Delete
 app.post('/api/delete/member/:memberId', MemberController.destroy);
 app.post('/api/delete/board/:ownerId', BoardController.destroy);
-app.post('/api/delete/:todo_id', TodoController.destroy);
+app.post('/api/delete/todo/:todo_id', TodoController.destroy);
 app.post('/api/delete/list/:list_id', ListController.destroy);
 
 //Server
