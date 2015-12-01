@@ -42,9 +42,9 @@ angular
         return deferred.promise;
     };
 
-    service.deleteList = function (id) {
+    service.deleteTodo = function (id) {
       var deferred = $q.defer();
-      $http.post('/api/delete/list/' + id)
+      $http.post('/api/delete/todo/' + id)
         .success(function (data) {
           deferred.resolve(data);
         })

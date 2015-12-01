@@ -1,14 +1,18 @@
 body {
-  background-color: #453C50;
+  background-color: #7AC894;
   color: white;
 }
 
-.navbar {
-  background-color: #9E626D;
+.navbar-default {
+  background-color: #115729;
   color: white;
 }
 
-.navbar-brand {
+.navbar-default .navbar-brand {
+  color: white;
+}
+
+.navbar-default .navbar-nav > li > a {
   color: white;
 }
 
@@ -36,11 +40,12 @@ body {
   width: 200px;
   height: 100px;
   margin: 1em;
-  background-color: #337AB7;
+  background-color: #115729;
 }
 
 .boards-page a {
   text-decoration: none;
+  color: #033213;
 }
 
 .boards {
@@ -49,14 +54,14 @@ body {
   margin: 3px 0 0;
   font-size: 1pc;
   font-weight: 700;
-  color: #6A915A;
+  color: #033213;
 }
 
 .board-list-name {
   background-size: cover;
   background-position: center center;
   border-radius: 3px;
-  color: white;
+  color: #033213;
   display: block;
   font-size: 1pc;
   font-weight: 600;
@@ -68,7 +73,7 @@ body {
 }
 
 .lists {
-  background-color: #A9A368;
+  background-color: #115729;
   border-radius: 3px;
   display: inline-block;
   margin: 0 5px;

@@ -32,45 +32,18 @@
         });
     };
 
-      //Show Boards
-      // BoardService.getBoards()
-      //   .then(function (data) {
-      //     vm.boards = data;
-      //   })
-      //   .catch(function (data) {
-      //     $log.error(data);
-      //   });
+    //Logout Member
+    vm.logoutMember = function () {
+      MemberService.logoutMember()
+        .then(function (data) {
+          AuthenticationService.clearCredentials(data);
+          $location.path('/');
+        })
+        .catch(function (data) {
+          $log.error(data);
+        });
+    };
 
-      // //Create Board
-      // vm.createBoard = function () {
-      //   BoardService.createBoard(vm.formData)
-      //     .then(function (data){
-      //       vm.boards.push(data);
-      //       vm.formData = {};
-      //     })
-      // };
-
-      // //Delete Lists
-      // vm.deleteList = function (id) {
-      //   $http.post('/api/delete/lists/' + id)
-      //     .success(function (data) {
-      //       vm.lists = data;
-      //     })
-      //     .error(function (data) {
-      //       $log.error(data);
-      //     });
-      // };
-
-      // //Edit Lists
-      // vm.editList = function (id, updatedItem) {
-      //   $http.post('/api/edit/lists/' + id, {name: updatedItem})
-      //     .success(function (data) {
-      //       vm.lists = data;
-      //     })
-      //     .error(function (data) {
-      //       $log.error(data);
-      //     });
-      // };
     }]);
 
 })();

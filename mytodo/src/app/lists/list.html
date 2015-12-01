@@ -1,4 +1,3 @@
-<div class="container">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -19,11 +18,10 @@
         </ul>
       <div class="userprofile" ng-model='main'>
         <ul class="nav navbar-nav navbar-right">
-          <!-- <li><a href="#">Uesr Profile</a></li> -->
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{lists.memberName}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#/memberlogout">Log Out</a></li>
+              <li ng-click="">Log Out</li>
             </ul>
           </li>
         </ul>
@@ -31,9 +29,10 @@
     </div><!-- /.container-fluid -->
   </nav>
 <!-- Display Lists -->
+<div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h2 class="boards">{{lists.boardName}}</h2>
+      <h1 class="boards">{{lists.boardName}}</h2>
     </div>
   </div>
   <div class="row">
@@ -69,19 +68,21 @@
     </div>
   </div>
 <!-- Create a Todo List -->
-  <h3>Create A Todo List</h3>
-  <div class="row">
-    <div class="col-md-6.text-center make-list">
-      <form role="form" ng-submit="lists.createList()">
-        <div class="row">
-          <div class="input-group">
-            <input type="text" ng-model="lists.formData.name" placeholder="Todo List Name" class="form-control">
-            <span class="input-group-btn">
-              <input type="submit" class="btn btn-primary" value="Add">
-            </span>
+  <div class="col-md-3">
+    <h3 class="boards">Create A Todo List</h3>
+    <div class="row">
+      <div class="col-md-6.text-center make-list">
+        <form role="form" ng-submit="lists.createList()">
+          <div class="row">
+            <div class="input-group">
+              <input type="text" ng-model="lists.formData.name" placeholder="Todo List Name" class="form-control">
+              <span class="input-group-btn">
+                <input type="submit" class="btn btn-primary" value="Add">
+              </span>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
   <div class="modal fade" id="addTodo" tabindex="-1" role="dialog" aria-labelledby="addTodo" aria-hidden="true">

@@ -3,7 +3,7 @@
 
   angular
     .module('mytodo')
-    .controller('TodoController', ['TodoService', '$log', '$scope', function (TodoService, $log, $scope) {
+    .controller('TodoController', ['TodoService', '$log', '$scope', '$http', function (TodoService, $log, $scope, $http) {
       var vm = this;
       vm.todos = [];
       vm.lists = [];
@@ -38,9 +38,14 @@
 
       //Delete Todos
       vm.deleteTodo = function (id) {
-        $http.post('/api/delete/' + id, {listId: vm.listId})
-          .success(function (data) {
-            vm.todos = data;
+        TodoService.deleteTodo(id)
+          .then(function (data) {
+            for (var i = 0; i < vm.todos.length; i++) {
+              if (vm.todos[i]._id == data._id) {
+                vm.todos.splice(i, 1);
+                break;
+              }
+            }
           })
           .catch(function (data) {
             $log.log(data);
