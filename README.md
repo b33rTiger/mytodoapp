@@ -1,4 +1,4 @@
-![](https://github.com/github/training-kit/blob/master/images/professortocat.png)
+![](https://raw.githubusercontent.com/b33rTiger/mytodoapp/master/mytodo/src/assets/images/Geter%20Done%20Home.png)
 
 Get'er Done!
 
