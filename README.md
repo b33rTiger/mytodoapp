@@ -1,5 +1,8 @@
 ![Logo](https://raw.githubusercontent.com/b33rTiger/mytodoapp/master/mytodo/src/assets/images/Geter%20Done%20Home.png)
 
+![Badges](https://img.shields.io/badge/license-MIT-blue.svg) 
+![Badges](https://img.shields.io/badge/tests-passing-green.svg)
+
 ============
 
 This is a MEAN application that provides the main functions you'd expect from a todo list manager.
