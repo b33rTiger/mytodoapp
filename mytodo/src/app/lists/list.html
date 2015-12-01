@@ -39,10 +39,11 @@
     <div ui-sortable ng-model='lists' ng-repeat='list in lists.lists'>
       <div class="col-md-3 lists">
         <div class='input-group' style="cursor: move">
-            <span style='padding-right: 1em'>{{list.name}}</span>
-            <span aria-hidden='true'>
-              <button class="btn btn-danger glyphicon glyphicon-remove-sign" ng-click='lists.deleteList(list._id)'></button>
-            </span>
+            <div class="list-name" style='padding-right: 1em'>{{list.name}}
+              <span aria-hidden='true'>
+                <button class="btn btn-danger glyphicon glyphicon-remove-sign" ng-click='lists.deleteList(list._id)'></button>
+              </span>
+            </div>
           <div ng-controller='TodoController as todos'>
             <div ng-init='todos.getTodos(list._id)'>
               <div class="todo-items row" ng-repeat='item in todos.todos'>
