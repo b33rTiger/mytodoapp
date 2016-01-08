@@ -30,17 +30,6 @@ angular
         return deferred.promise;
     };
 
-    // service.createBoard = function (formData) {
-    //   var deferred = $q.defer();
-    //   $http.post('/api/boards', formData)
-    //     .success(function (data) {
-    //       deferred.resolve(data);
-    //     })
-    //     .error(function (data) {
-    //       deferred.reject('Error: ', data);
-    //     });
-    //     return deferred.promise;
-    // };
     return service;
   }]);
 })();
