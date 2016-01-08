@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// create a schema
 //Todos
 var todoSchema = new Schema({
   item: { type: String, unique: true },

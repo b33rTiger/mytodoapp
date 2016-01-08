@@ -154,25 +154,6 @@ describe ('TodoController', function() {
                 }
             });
         });
-
-        //Test for updating a todo item
-        // it('should update an existing todo item', function (done){
-        //     request(app).post('/api/todos/edit/'+todo._id)
-        //     .send({
-        //         name:'updatedNameTodo'
-        //     })
-        //     .end(function (err,res){
-        //         if (err) {
-        //           done.fail(err);
-        //         } else {
-        //             returnedTodo = res.body[res.body.length-1];
-        //             expect(returnedTodo.name).toBe('updatedNameTodo');
-        //             Todo.findOne({ name:'updatedNameTodo'})
-        //             done();
-        //         }
-        //     })
-        // })
-
     });
 });
 

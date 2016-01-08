@@ -29,19 +29,7 @@ var ListController = require('./app/controllers/list_controller.js');
 var BoardController = require('./app/controllers/board_controller.js');
 var MemberController = require('./app/controllers/member_controller.js');
 var AuthenticationController = require('./app/controllers/authentication_controller.js');
-
 var AuthenticationMiddleware = require('./app/authentication_middleware');
-// app.use('/api', AuthenticationMiddleware.authenticate);
-
-
-
-// //Allow cross-site
-// app.use(function (req,res,next){
-//   res.header('Access-Control-Allow-Origin','*');
-//   res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept');
-//   next();
-// });
-
 
 //Routes
 app.use('/api', AuthenticationMiddleware.authenticate);

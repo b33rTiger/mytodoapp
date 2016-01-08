@@ -188,24 +188,6 @@ describe ('BoardController', function() {
        }
      })
    })
-
-//    //Test for updating a board
-//    it('should update an existing board', function (done) {
-//      request(app).post('/api/boards/edit/'+board._id)
-//      .send({
-//        name: 'updatedBoard'
-//      })
-//      .end(function (err,res) {
-//        if (err) {
-//          done.fail(err);
-//        } else {
-//          returnedBoard = res.body[res.body.length-1];
-//          expect(returnedBoard.name).toBe('updatedBoard');
-//          Board.findOne({ name: 'updatedBoard'})
-//          done();
-//        }
-//      })
-//    })
  })
 })
 
