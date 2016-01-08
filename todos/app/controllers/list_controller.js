@@ -7,7 +7,7 @@ var Board = require('../models/board');
 
 //Index
 exports.index = function (req, res) {
-  var board_id = req.param('boardId');
+  var board_id = req.query.boardId;
   List.find({_board: board_id})
   .populate('todos')
   .exec(function (error, lists) {
