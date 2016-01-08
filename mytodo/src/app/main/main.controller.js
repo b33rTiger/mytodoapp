@@ -32,28 +32,5 @@
             vm.formData = {};
           })
       };
-
-      // //Delete Lists
-      // vm.deleteList = function (id) {
-      //   $http.post('/api/delete/lists/' + id)
-      //     .success(function (data) {
-      //       vm.lists = data;
-      //     })
-      //     .error(function (data) {
-      //       $log.error(data);
-      //     });
-      // };
-
-      // //Edit Lists
-      // vm.editList = function (id, updatedItem) {
-      //   $http.post('/api/edit/lists/' + id, {name: updatedItem})
-      //     .success(function (data) {
-      //       vm.lists = data;
-      //     })
-      //     .error(function (data) {
-      //       $log.error(data);
-      //     });
-      // };
     }]);
-
 })();

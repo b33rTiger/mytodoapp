@@ -50,17 +50,5 @@
             $log.log('Error: ' + data);
           });
       };
-
-      //Edit Lists
-      // $scope.editList = function (id, updatedItem) {
-      //   $http.post('/api/edit/lists/' + id, {name: updatedItem})
-      //     .success(function (data) {
-      //       $scope.lists = data;
-      //     })
-      //     .error(function (data) {
-      //       console.log('Error: ' + data);
-      //     });
-      // };
     }]);
-
 })();

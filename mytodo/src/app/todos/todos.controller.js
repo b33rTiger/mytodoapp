@@ -8,9 +8,6 @@
       vm.todos = [];
       vm.lists = [];
       vm.formData = {};
-      // vm.listId = $routeParams.listId;
-      // vm.listName = $routeParams.listName;
-      // vm.listDescription = $routeParams.listDescription;
 
       //Get Todos
       vm.getTodos = function (listId) {
