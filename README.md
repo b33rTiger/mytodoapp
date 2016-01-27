@@ -14,7 +14,7 @@ This is a MEAN application that provides the main functions you'd expect from a 
 ---
 
 ## Setup
-Clone this repo to your desktop and run `npm install` and then `bower install` to install all the dependencies.
+Clone this repo to your desktop and run `npm install` and then `bower install` to install all the dependencies. MongoDB is required. Install instructions can be found here https://docs.mongodb.org/manual/administration/install-community/
 
 
 ---
